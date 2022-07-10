@@ -1,0 +1,45 @@
+<!DOCYPE html>
+<html>
+    <head>
+        <title>Hello world!</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script src="mathjax.js"></script>
+        <!-- <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+        <style>
+            html, body{
+                margin:0;
+                padding:0;
+            }
+            #preview{
+                margin:0;
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                z-index: -1;
+            }
+            input{
+                width: 100%;
+                padding: 10px 10px;
+                border: 1px solid #ccc;
+            }
+            input:focus{
+                outline: none;
+            }
+        </style>
+    </head>
+    <body>
+        \[\frac{Hello}{World}\]
+        <span id="preview"></span>
+        <input id="math">
+
+        <script>
+            const preview_elem = document.getElementById('preview');
+            const math_elem = document.getElementById('math');
+            math_elem.addEventListener('input', function() {
+                preview_elem.innerText = '\\['+math_elem.value+'\\]';
+                MathJax.typesetPromise([preview_elem]);
+            });
+        </script>
+    </body>
+</html>
