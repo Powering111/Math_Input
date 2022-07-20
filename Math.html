@@ -1,45 +1,43 @@
-<!DOCYPE html>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Hello world!</title>
+        <title>Chat &times; Math</title>
+        <meta charset="utf-8">
+        
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script src="mathjax.js"></script>
-        <!-- <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
-
-        <style>
-            html, body{
-                margin:0;
-                padding:0;
-            }
-            #preview{
-                margin:0;
-                width:100%;
-                position: absolute;
-                bottom: 0;
-                z-index: -1;
-            }
-            input{
-                width: 100%;
-                padding: 10px 10px;
-                border: 1px solid #ccc;
-            }
-            input:focus{
-                outline: none;
-            }
-        </style>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <link rel="stylesheet" href="/res/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     </head>
     <body>
-        \[\frac{Hello}{World}\]
-        <span id="preview"></span>
-        <input id="math">
-
-        <script>
-            const preview_elem = document.getElementById('preview');
-            const math_elem = document.getElementById('math');
-            math_elem.addEventListener('input', function() {
-                preview_elem.innerText = '\\['+math_elem.value+'\\]';
-                MathJax.typesetPromise([preview_elem]);
-            });
-        </script>
+        <div id="menu-bar">
+        \[Chat \times Math\]
+        </div>
+        <div id="chat-container">
+            <div id="list-container">
+                chats comes here.
+            </div>
+            <div id="input-container">
+                <div id="math-box" class="input-box" style="display:none;">
+                    <div id="math-preview-container">
+                        <div id="math-preview"></div>
+                    </div>
+                    <span id="math-input-help">MATH</span>
+                    <div id="math-input-and-send">
+                        <input id="math-input" class="input">
+                        <span id="math-send-btn" class="material-icons send-btn">send</span>
+                    </div>
+                </div>
+                <div id="text-box" class="input-box">
+                    <span id="text-input-help">TEXT</span>
+                    <div id="text-input-and-send">
+                        <input id="text-input" class="input" autofocus>
+                        <span id="text-send-btn" class="material-icons send-btn">send</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/res/math.js"></script>
     </body>
 </html>

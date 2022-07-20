@@ -1,0 +1,133 @@
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+}
+body{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+#menu-bar{
+    
+    height:3em;
+
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    background-color:#f5f5f5;
+    padding:0.5em;
+    flex-grow:0;
+}
+
+#chat-container{
+    flex-grow:1;
+    max-width:600px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    align-items: center;
+}
+#math-preview-container{
+
+    margin:0;
+    bottom: 0;
+    z-index: 1;
+    background-color:#eee;
+    border:5px inset red;
+    border-bottom:none;
+    overflow:auto;
+    height:55px;
+}
+#math-preview{
+    display:inline-block;
+    margin-left:10px;
+    padding:auto;
+}
+
+#list-container{
+    flex: 1 1 auto;
+    width:100%;
+    background-color:rgb(255, 145, 0);
+}
+#input-container{
+    width:100%;
+    flex: 0 1 auto;
+}
+.input-box{
+    width:100%;
+    height:100%;
+}
+
+#text-input-and-send, #math-input-and-send{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding:0;
+    margin:0;
+}
+
+.input{
+    flex-grow:1;
+    padding: 10px 10px;
+    border: 2px solid #ccc;
+    border-radius : 30px;
+    outline:none;
+    transition: border-color 0.2s;
+}
+
+#math-input:focus{
+    border-color:red;
+}
+
+#text-input:focus{
+    border-color: blue;
+}
+
+#math-input-help, #text-input-help{
+    border-radius: 10px 10px 0px 0px;
+    margin-left:20px;
+    color:white;
+    user-select:none;
+    cursor:pointer;
+    padding:1px 10px;
+}
+
+#math-input-help{
+    background-color:red;
+}
+#text-input-help{
+    background-color:blue;
+}
+
+.send-btn{
+    flex-grow:0;
+    cursor:pointer;
+    user-select: none;
+    padding:9px;
+    border-radius:30px;
+    color:white;
+    transition : background-color 0.2s;
+    margin-left:5px;
+}
+
+#text-send-btn{
+    background-color: rgb(104, 199, 255);
+}
+#text-send-btn:hover{
+    background-color:rgb(44, 61, 248);
+}
+#math-send-btn{
+    background-color: rgb(255, 107, 104);
+}
+#math-send-btn:hover{
+    background-color:rgb(206, 40, 25);
+}
