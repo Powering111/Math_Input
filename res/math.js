@@ -1,4 +1,5 @@
 const join_container_elem = document.getElementById('join-container');
+const chat_container_container_elem = document.getElementById('chat-container-container');
 const chat_container_elem = document.getElementById('chat-container');
 const setting_container_elem = document.getElementById('setting-container');
 
@@ -33,6 +34,10 @@ const text_send_btn_elem = document.getElementById('text-send-btn');
 
 const math_input_help_elem = document.getElementById('math-input-help');
 const text_input_help_elem = document.getElementById('text-input-help');
+
+const roomlist_list_elem = document.getElementById('roomlist-list');
+const userlist_list_elem = document.getElementById('userlist-list');
+
 
 // keyboard shortcuts
 input_container_elem.addEventListener('keydown',(e)=>{
@@ -99,7 +104,7 @@ function joinroom(room){
             list_container_elem.innerHTML='';
             
             join_container_elem.style.display = 'none';
-            chat_container_elem.style.display = '';
+            chat_container_container_elem.style.display = '';
             setting_container_elem.open=false;
 
             input_state = 'text';
@@ -125,7 +130,7 @@ leave_btn_elem.addEventListener('click',(e)=>{
 function leave(){
     socket.emit('leaveroom',()=>{
         join_container_elem.style.display = '';
-        chat_container_elem.style.display = 'none';
+        chat_container_container_elem.style.display = 'none';
         
     });
 }
@@ -321,4 +326,28 @@ socket.on('userleave',(name)=>{
 socket.on('namechange',(e)=>{
     createSystemMessage(`${e.old_name} -> ${e.new_name}으로 이름이 변경되었습니다.`);
     
+});
+
+socket.on('roomsUpdate',(e)=>{
+    roomlist_list_elem.innerHTML = '';
+    console.log(e);
+    e.forEach((room)=>{
+        const roomElement = document.createElement('li');
+        const buttonElement = document.createElement('button');
+        buttonElement.innerText=room;
+        roomElement.appendChild(buttonElement);
+        roomlist_list_elem.appendChild(roomElement);
+    })
+});
+socket.on('usersUpdate',(e)=>{
+    userlist_list_elem.innerHTML = '';
+    console.log(e);
+    e.forEach((user)=>{
+        const userElement = document.createElement('li');
+        const buttonElement = document.createElement('button');
+        buttonElement.innerText=user;
+        userElement.appendChild(buttonElement);
+
+        userlist_list_elem.appendChild(userElement);
+    })
 });

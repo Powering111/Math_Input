@@ -3,7 +3,7 @@
     <head>
         <title>Chat &times; Math</title>
         <meta charset="utf-8">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script src="/socket.io/socket.io.js"></script>
@@ -23,26 +23,27 @@
         <div id="join-container">
             <div class="input-container">
                 <label for="name-input">이름</label>
-                <input id="name-input">
+                <input id="name-input" autofocus>
             </div>
             <div class="input-container">
                 <label for="room-input">방</label>
                 <input id="room-input">
             </div>
             <div id="join-alert"></div>
-            <div id="join-btn">입장</div>
+            <button type="button" id="join-btn">입장</button>
         </div>
-        <div id="chat-container" style="display:none;">
+        <div id="chat-container-container" style="display:none;">
+        <div id="chat-container">
             <span id="roomname-label"></span>
                 <details id="setting-container">
                     <summary>설정</summary>
                     <div id="setting-box">
                         <input id="changeroom-input" placeholder="방 이름">
-                        <span id="changeroom-btn">방 변경</span>
+                        <button type="button" id="changeroom-btn">방 변경</button>
                         <input id="changename-input" placeholder="이름">
-                        <span id="changename-btn">이름 변경</span>
+                        <button type="button" id="changename-btn">이름 변경</button>
                     </div>
-                    <span id="leave-btn">나가기</span>
+                    <span id="leave-btn">방 나가기</span>
                 </details>
             <div id="list-container">
             </div>
@@ -52,20 +53,21 @@
                     <div id="math-preview-container">
                         <div id="math-preview"></div>
                     </div>
-                    <span id="math-input-help">MATH</span>
+                    <button type="button" id="math-input-help">MATH</button>
                     <div id="math-input-and-send">
-                        <input id="math-input" class="input">
-                        <span id="math-send-btn" class="material-icons send-btn">send</span>
+                        <input id="math-input" class="input" type="text">
+                        <button type="button" id="math-send-btn" class="material-icons send-btn">send</button>
                     </div>
                 </div>
                 <div id="text-box" class="input-box">
-                    <span id="text-input-help">TEXT</span>
+                    <button type="button" id="text-input-help">TEXT</button>
                     <div id="text-input-and-send">
-                        <input id="text-input" class="input" autofocus>
-                        <span id="text-send-btn" class="material-icons send-btn">send</span>
+                        <input id="text-input" class="input" type="text">
+                        <button type="button" id="text-send-btn" class="material-icons send-btn">send</button>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <script src="/res/math.js"></script>
     </body>

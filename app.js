@@ -24,7 +24,7 @@ const server = app.listen(80,()=>{
 
 const io = SocketIO(server,{path:'/socket.io'});
 io.on('connection',(socket)=>{
-    
+    socket.emit('roomsUpdate',getRooms());
     console.log('a user connected');
     socket.name="Anonymous";
     socket.on('disconnecting',()=>{
@@ -32,10 +32,11 @@ io.on('connection',(socket)=>{
         socket.rooms.forEach((room)=>{
             io.to(room).emit('userleave',socket.name);
             socket.leave(room);
-            console.log(room);
+            updateUsers(socket.roomname);
+            updateRooms();
         });
     });
-
+    
     socket.on('disconnect',()=>{
         console.log('a user disconnected');
     }
@@ -54,18 +55,22 @@ io.on('connection',(socket)=>{
             if(socket.roomname){
                 socket.leave(socket.roomname);
                 io.to(socket.roomname).emit('userleave',socket.name);
-
+                updateUsers(socket.roomname);
             }
             socket.roomname=room;
             socket.join(room);
             io.to(room).emit('userjoin',socket.name);
-            console.log(socket.name,": ",socket.rooms);
+            updateUsers(socket.roomname);
+            updateRooms();
+            console.log("-----",socket.name,": ",socket.rooms);
         }
         callback();
     });
     socket.on('leaveroom',(callback)=>{
         console.log('user leave room : '+socket.roomname);
         io.to(socket.roomname).emit('userleave',socket.name);
+        updateUsers(socket.roomname);
+        updateRooms();
         socket.leave(socket.roomname);
         socket.roomname=null;
         callback();
@@ -80,5 +85,36 @@ io.on('connection',(socket)=>{
         console.log('math message received : '+msg);
         socket.broadcast.to(socket.roomname).emit('mathmsg',{from:socket.name,message:msg});
     });
+});
+
+function updateRooms(){
+    const rooms = getRooms();
+    io.emit('roomsUpdate', rooms);
 }
-);
+function updateUsers(room){
+    io.to(room).emit('usersUpdate',getUsers(room));
+}
+
+function getRooms(){
+    const arr = Array.from(io.sockets.adapter.rooms);
+    const filtered = arr.filter(room => !room[1].has(room[0]))
+    
+    const res = filtered.map(i => i[0]);
+    return res;
+}
+
+function getUsers(room){
+    if(room){
+        const users = Array();
+        console.log('rooms.get',io.sockets.adapter.rooms.get(room));
+        io.sockets.adapter.rooms.get(room).forEach((socketid)=>{
+            const socket = io.sockets.sockets.get(socketid);
+            users.push(socket.name);
+        });
+        return users;
+    }
+    else{
+        console.log("now")
+        return [];
+    }
+}
