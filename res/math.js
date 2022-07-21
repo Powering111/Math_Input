@@ -1,5 +1,6 @@
 const join_container_elem = document.getElementById('join-container');
 const chat_container_elem = document.getElementById('chat-container');
+const setting_container_elem = document.getElementById('setting-container');
 
 // join
 const name_input_elem = document.getElementById('name-input');
@@ -99,6 +100,8 @@ function joinroom(room){
             
             join_container_elem.style.display = 'none';
             chat_container_elem.style.display = '';
+            setting_container_elem.open=false;
+
             input_state = 'text';
             resetInput();
             focusOnInput();
@@ -130,6 +133,12 @@ function leave(){
 // input state change
 let input_state = 'text';
 function toggleMathState(){
+    let scrolledBottom=false;
+    //check if scrolled bottom
+    if (Math.ceil(list_container_elem.scrollTop)+10 >= list_container_elem.scrollHeight - list_container_elem.clientHeight){
+        scrolledBottom = true;
+    }
+
     if(input_state == 'text'){
         input_state = 'math';
         math_box_elem.style.display = '';
@@ -142,6 +151,10 @@ function toggleMathState(){
         text_box_elem.style.display = '';
         resetInput();
         focusOnInput();
+    }
+    //auto scroll to bottom
+    if(scrolledBottom){
+        list_container_elem.scrollTop = list_container_elem.scrollHeight;
     }
 }
 
