@@ -338,6 +338,70 @@ body{
 #leave-btn:hover{
     background-color:#ffb6b6;
 }
+
+
+#roomlist, #userlist{
+    position:fixed;
+    top:0;
+    width:100px;
+    height:600px;
+    z-index:3;
+    overflow:auto;
+    list-style:none;
+    background-color:cornsilk;
+}
+#roomlist:not([open]), #userlist:not([open]){
+    background-color:transparent;
+}
+#roomlist-list, #userlist-list{
+    list-style:none;
+    padding:0;
+}
+#roomlist-list > li > button, #userlist-list > li > button{
+    background-color:beige;
+    border:none;
+    border-radius:3px;
+    padding:5px;
+    width:100%;
+    cursor:pointer;
+    user-select:none;
+    display:block;
+}
+
+#roomlist{
+    left:10px;
+}
+#userlist{
+    right:10px;
+}
+#roomlist[open] #roomlist-toggle-btn, #userlist[open] #userlist-toggle-btn{
+    background-color:rgb(226, 243, 255);
+    color:black;
+}
+#roomlist-toggle-btn, #userlist-toggle-btn{
+    border-radius:30px;
+    border:none;
+    padding:10px;
+    color:white;
+    background-color: rgb(9, 128, 255);
+    transition : background-color 0.2s;
+    position:fixed;
+    z-index:4;
+    bottom:25px;
+    user-select:none;
+    cursor:pointer;
+}
+#roomlist-toggle-btn{
+    left:25px;
+}
+#userlist-toggle-btn{
+    right:25px;
+}
+#roomlist-toggle-btn:hover, #userlist-toggle-btn:hover{
+    background-color:rgb(133, 204, 255);
+}
+
+
 /* for mobile */
 @media (max-width:768px){
     #menu-bar{
@@ -359,5 +423,19 @@ body{
         width:100px;
         display:inline-block;
         padding:7px 0px;
+    }
+    #roomlist, #userlist{
+        top:50px;
+    }
+    #userlist-toggle-btn{
+        bottom:auto;
+        top:5px;
+        right:auto;
+        left:60px;
+    }
+    #roomlist-toggle-btn{
+        bottom:auto;
+        top:5px;
+        left:10px;
     }
 }

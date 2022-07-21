@@ -104,7 +104,7 @@ function getRooms(){
 }
 
 function getUsers(room){
-    if(room){
+    try{
         const users = Array();
         console.log('rooms.get',io.sockets.adapter.rooms.get(room));
         io.sockets.adapter.rooms.get(room).forEach((socketid)=>{
@@ -113,8 +113,7 @@ function getUsers(room){
         });
         return users;
     }
-    else{
-        console.log("now")
+    catch{
         return [];
     }
 }
