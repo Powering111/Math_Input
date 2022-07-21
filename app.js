@@ -45,6 +45,6 @@ io.on('connection',(socket)=>{
     socket.on('mathmsg',(msg)=>{
         console.log('math message received : '+msg);
         socket.broadcast.emit('mathmsg',{from:socket.name,message:msg});
-    })
+    });
 }
 );

@@ -12,6 +12,16 @@ body{
     align-items: center;
 }
 
+::-webkit-scrollbar{
+    background:transparent;
+    width:10px;
+}
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg, red, orange, yellow, green, blue, purple);
+    border-radius:10px;
+
+}
+
 #menu-bar{
     
     height:3em;
@@ -26,9 +36,18 @@ body{
 }
 
 #chat-container{
+    background-color:rgb(194,255,247);
     flex-grow:1;
+    
     max-width:600px;
     width:100%;
+    height:0px;
+
+    border:1px dashed black;
+    border-radius:5px;
+    padding:10px;
+    margin:10px;
+    
     display:flex;
     flex-direction:column;
     justify-content: space-between;
@@ -41,18 +60,16 @@ body{
 }
 .message-from{
     overflow:auto;
-    color:white;
+    color:rgb(0, 0, 0);
 }
 .message-content{
     display:block;
     padding:5px 10px;
-    border: 2px dashed black;
+    border: 2px dashed #ff9e9e;
+    border-radius:11px;
     background-color: rgb(255, 242, 224);
 }
 
-.message-me > .message-from{
-    
-}
 .message-me > .message-content{
     background-color:rgb(255, 252, 95);
 }
@@ -78,7 +95,7 @@ body{
 #list-container{
     flex: 1 1 auto;
     width:100%;
-    background-color:rgb(255, 145, 0);
+    overflow:auto;
 }
 #input-container{
     width:100%;
@@ -154,4 +171,54 @@ body{
 }
 #math-send-btn:hover{
     background-color:rgb(206, 40, 25);
+}
+
+#join-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background-color:azure;
+    border-radius:10px;
+    border:1px dashed black;
+}
+.input-container{
+    display:flex;
+    width:230px;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding:0;
+    margin:0;
+}
+.input-container > label{
+    flex-grow:1;
+}
+.input-container > input{
+    text-align:center;
+    flex-grow:0;
+    margin-left:10px;
+    padding: 10px 10px;
+    border: 2px solid #ccc;
+    border-radius : 30px;
+    outline:none;
+    transition: border-color 0.2s;
+}
+.input-container > input:focus{
+    border-color:rgb(0, 200, 255);
+}
+
+#join-btn{
+    padding:10px;
+    border-radius:30px;
+    color:white;
+    background-color: rgb(0, 200, 255);
+    transition : background-color 0.2s;
+    margin-top:10px;
+    cursor:pointer;
+    user-select:none;
+}
+#join-btn:hover{
+    background-color:rgb(0, 150, 255);
 }

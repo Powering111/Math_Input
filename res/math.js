@@ -83,6 +83,7 @@ function preview(){
 
 function sendText(){
     const msg = text_elem.value;
+    if(msg=='') return;
     console.log("sending text message : "+msg);
     socket.emit('textmsg',msg);
     const messageElement = createTextMessage('Me',msg);
@@ -90,6 +91,7 @@ function sendText(){
 }
 function sendMath(){
     const msg = math_elem.value;
+    if(msg=='') return;
     console.log("sending math message : "+msg);
     socket.emit('mathmsg',msg);
     const messageElement = createMathMessage('Me',msg);
@@ -110,12 +112,40 @@ function sendMessage(){
     focusOnInput();
 }
 
+
+const appearAnimation = [
+    {opacity:0},
+    {opacity:1}
+];
+const appearTiming = {
+    duration : 500,
+    iterations:1
+};
+
+function createMessage(messageElement){
+
+    let scrolledBottom=false;
+    //check if scrolled bottom
+    if (Math.ceil(list_container_elem.scrollTop)+10 >= list_container_elem.scrollHeight - list_container_elem.clientHeight){
+        scrolledBottom = true;
+    }
+
+    list_container_elem.appendChild(messageElement);
+    messageElement.animate(appearAnimation,appearTiming);
+
+    //auto scroll to bottom
+    if(scrolledBottom){
+        list_container_elem.scrollTop = list_container_elem.scrollHeight;
+    }
+}
 function createTextMessage(from,msg){
     const messageElement = document.createElement('div');
     const fromElement = document.createElement('span');
     const contentElement = document.createElement('span');
+
     fromElement.innerText=from;
     contentElement.innerText=msg;
+
     messageElement.classList.add('message');
     messageElement.classList.add('text-message');
     fromElement.classList.add('message-from');
@@ -123,16 +153,19 @@ function createTextMessage(from,msg){
     
     messageElement.appendChild(fromElement);
     messageElement.appendChild(contentElement);
-    list_container_elem.appendChild(messageElement);
+    
+    createMessage(messageElement);
     return messageElement;
 }
 function createMathMessage(from,msg){
     const messageElement = document.createElement('div');
     const fromElement = document.createElement('span');
     const contentElement = document.createElement('span');
+
     fromElement.innerText=from;
     contentElement.innerText='\\('+msg+'\\)';
     MathJax.typesetPromise([contentElement]);
+
     messageElement.classList.add('message');
     messageElement.classList.add('math-message');
     fromElement.classList.add('message-from');
@@ -140,7 +173,8 @@ function createMathMessage(from,msg){
     
     messageElement.appendChild(fromElement);
     messageElement.appendChild(contentElement);
-    list_container_elem.appendChild(messageElement);
+    
+    createMessage(messageElement);
     return messageElement;
 }
 
