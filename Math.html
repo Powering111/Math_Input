@@ -6,6 +6,12 @@
         
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io.connect('/',{
+                path:'/socket.io'
+            });
+        </script>
         <link rel="stylesheet" href="/res/style.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">

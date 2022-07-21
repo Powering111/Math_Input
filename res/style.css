@@ -34,6 +34,30 @@ body{
     justify-content: space-between;
     align-items: center;
 }
+
+.message{
+    margin:5px;
+    
+}
+.message-from{
+    overflow:auto;
+    color:white;
+}
+.message-content{
+    display:block;
+    padding:5px 10px;
+    border: 2px dashed black;
+    background-color: rgb(255, 242, 224);
+}
+
+.message-me > .message-from{
+    
+}
+.message-me > .message-content{
+    background-color:rgb(255, 252, 95);
+}
+
+
 #math-preview-container{
 
     margin:0;
