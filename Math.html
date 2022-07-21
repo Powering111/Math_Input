@@ -29,12 +29,25 @@
                 <label for="room-input">방</label>
                 <input id="room-input">
             </div>
+            <div id="join-alert"></div>
             <div id="join-btn">입장</div>
         </div>
-        <div id="chat-container">
+        <div id="chat-container" style="display:none;">
+            <span id="roomname-label"></span>
+                <details id="setting-container">
+                    <summary>설정</summary>
+                    <div id="setting-box">
+                        <input id="changeroom-input" placeholder="방 이름">
+                        <span id="changeroom-btn">방 변경</span>
+                        <input id="changename-input" placeholder="이름">
+                        <span id="changename-btn">이름 변경</span>
+                    </div>
+                    <span id="leave-btn">나가기</span>
+                </details>
             <div id="list-container">
             </div>
             <div id="input-container">
+                <span id="name-label"></span>
                 <div id="math-box" class="input-box" style="display:none;">
                     <div id="math-preview-container">
                         <div id="math-preview"></div>

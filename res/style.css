@@ -15,11 +15,16 @@ body{
 ::-webkit-scrollbar{
     background:transparent;
     width:10px;
+    height:10px;
 }
 ::-webkit-scrollbar-thumb{
     background:linear-gradient(180deg, red, orange, yellow, green, blue, purple);
     border-radius:10px;
-
+    
+}
+::-webkit-scrollbar-thumb:horizontal{
+    background:linear-gradient(to right, red, orange, yellow, green, blue, purple);
+    
 }
 
 #menu-bar{
@@ -100,6 +105,7 @@ body{
 #input-container{
     width:100%;
     flex: 0 1 auto;
+    position:relative;
 }
 .input-box{
     width:100%;
@@ -221,4 +227,97 @@ body{
 }
 #join-btn:hover{
     background-color:rgb(0, 150, 255);
+}
+
+#join-alert{
+    color:red;
+}
+
+#roomname-label{
+    display:block;
+    width:100%;
+    text-align:center;
+    font-size:20px;
+    background-color:white;
+    color:black;
+    padding:10px 0px;
+    margin:10px;
+    border-radius:10px;
+}
+#name-label{
+    position:absolute;
+    right:0;
+    bottom:42px;
+}
+
+#setting-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background-color:azure;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    width:100%;
+    text-align:center;
+}
+#setting-container > summary{
+    display:inline;
+    user-select:none;
+    cursor:pointer;
+    padding:5px 10px;
+    background-color:aquamarine;
+    border-radius:2px;
+    list-style:none;
+    transition:background-color 0.2s;
+}
+#setting-container > summary:hover{
+    background-color:rgb(85, 255, 221);
+}
+#setting-container[open] > summary{
+    background-color:rgb(45, 164, 249);
+    color:white;
+}
+#setting-box{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    padding:5px;
+    margin:5px;
+    background-color:azure;
+    border-radius:5px;
+    border:1px dashed black;
+}
+
+#changeroom-input, #changename-input{
+    text-align:center;
+    flex-grow:0;
+    margin-left:10px;
+    padding: 10px 10px;
+    border: 2px solid #ccc;
+    border-radius : 30px 0px 0px 30px;
+    outline:none;
+    transition: border-color 0.2s;
+}
+#changeroom-btn, #changename-btn{
+    padding:9px;
+    border-radius:0px 30px 30px 0px;
+    color:white;
+    background-color: rgb(0, 200, 255);
+    transition : background-color 0.2s;
+    cursor:pointer;
+    user-select:none;
+}
+#leave-btn{
+    color:red;
+    padding:9px;
+    background-color:white;
+    border-radius:2px;
+    cursor:pointer;
+    user-select:none;
+    transition : background-color 0.2s;
+}
+#leave-btn:hover{
+    background-color:#ffb6b6;
 }

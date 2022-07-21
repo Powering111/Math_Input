@@ -27,24 +27,58 @@ io.on('connection',(socket)=>{
     
     console.log('a user connected');
     socket.name="Anonymous";
+    socket.on('disconnecting',()=>{
+        
+        socket.rooms.forEach((room)=>{
+            io.to(room).emit('userleave',socket.name);
+            socket.leave(room);
+            console.log(room);
+        });
+    });
+
     socket.on('disconnect',()=>{
         console.log('a user disconnected');
     }
     );
     
-    socket.on('setname',(msg)=>{
-        console.log('user set name : '+msg);
-        socket.name = msg;
+    socket.on('setname',(name,callback)=>{
+        console.log('user set name : '+name);
+        io.to(socket.roomname).emit('namechange',{old_name:socket.name,new_name:name});
+        socket.name = name;
+        callback();
+    });
+
+    socket.on('joinroom',(room,callback)=>{
+        if(room){
+            console.log('user join room : '+room);
+            if(socket.roomname){
+                socket.leave(socket.roomname);
+                io.to(socket.roomname).emit('userleave',socket.name);
+
+            }
+            socket.roomname=room;
+            socket.join(room);
+            io.to(room).emit('userjoin',socket.name);
+            console.log(socket.name,": ",socket.rooms);
+        }
+        callback();
+    });
+    socket.on('leaveroom',(callback)=>{
+        console.log('user leave room : '+socket.roomname);
+        io.to(socket.roomname).emit('userleave',socket.name);
+        socket.leave(socket.roomname);
+        socket.roomname=null;
+        callback();
     });
     
     socket.on('textmsg',(msg)=>{
         console.log('text message received : '+msg);
-        socket.broadcast.emit('textmsg',{from:socket.name,message:msg});
+        socket.broadcast.to(socket.roomname).emit('textmsg',{from:socket.name,message:msg});
     }
     );
     socket.on('mathmsg',(msg)=>{
         console.log('math message received : '+msg);
-        socket.broadcast.emit('mathmsg',{from:socket.name,message:msg});
+        socket.broadcast.to(socket.roomname).emit('mathmsg',{from:socket.name,message:msg});
     });
 }
 );
